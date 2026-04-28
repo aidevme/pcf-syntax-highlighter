@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest>
+  <control namespace="AIDEVME.CRM.Pcf" constructor="SyntaxHighlighter" version="0.0.1"
+    display-name-key="SyntaxHighlighter" description-key="SyntaxHighlighter description"
+    control-type="virtual">
+    <!--external-service-usage
+    node declares whether this 3rd party PCF control is using external service or not, if yes, this
+    control will be considered as premium and please also add the external domain it is using.
+    If it is not using any external service, please set the enabled="false" and DO NOT add any domain
+    below. The "enabled" will be false by default.
+    Example1:
+      <external-service-usage enabled="true">
+        <domain>www.Microsoft.com</domain>
+      </external-service-usage>
+    Example2:
+      <external-service-usage enabled="false">
+      </external-service-usage>
+    -->
+    <external-service-usage enabled="false">
+      <!--UNCOMMENT
+      TO ADD EXTERNAL DOMAINS
+      <domain></domain>
+      <domain></domain>
+      -->
+    </external-service-usage>
+    <!-- property node identifies a specific, configurable piece of data that the control expects
+    from CDS -->
+    <property name="syntaxHiglightedField" display-name-key="syntaxHiglightedField_Display_Key"
+      description-key="syntaxHiglightedField_Desc_Key" of-type="Multiple" usage="bound"
+      required="true" />
+    <property name="syntaxHighlighterDefaultLanguage" display-name-key="syntaxHighlighterDefaultLanguage_Display_Key"
+      description-key="syntaxHighlighterDefaultLanguage_Desc_Key" of-type="Enum" usage="input"
+      required="false" default-value="markdown">
+      <value name="abap" display-name-key="abap_Display_Key">abap</value>
+      <value name="actionscript-3" display-name-key="actionscript-3_Display_Key">actionscript-3</value>
+      <value name="ada" display-name-key="ada_Display_Key">ada</value>
+      <value name="ansi" display-name-key="ansi_Display_Key">ansi</value>
+      <value name="apache" display-name-key="apache_Display_Key">apache</value>
+      <value name="apex" display-name-key="apex_Display_Key">apex</value>
+      <value name="apl" display-name-key="apl_Display_Key">apl</value>
+      <value name="applescript" display-name-key="applescript_Display_Key">applescript</value>
+      <value name="ara" display-name-key="ara_Display_Key">ara</value>
+      <value name="asm" display-name-key="asm_Display_Key">asm</value>
+      <value name="astro" display-name-key="astro_Display_Key">astro</value>
+      <value name="awk" display-name-key="awk_Display_Key">awk</value>
+      <value name="ballerina" display-name-key="ballerina_Display_Key">ballerina</value>
+      <value name="bash" display-name-key="bash_Display_Key">bash</value>
+      <value name="bat" display-name-key="bat_Display_Key">bat</value>
+      <value name="beancount" display-name-key="beancount_Display_Key">beancount</value>
+      <value name="berry" display-name-key="berry_Display_Key">berry</value>
+      <value name="bibtex" display-name-key="bibtex_Display_Key">bibtex</value>
+      <value name="bicep" display-name-key="bicep_Display_Key">bicep</value>
+      <value name="blade" display-name-key="blade_Display_Key">blade</value>
+      <value name="c" display-name-key="c_Display_Key">c</value>
+      <value name="cadence" display-name-key="cadence_Display_Key">cadence</value>
+      <value name="clarity" display-name-key="clarity_Display_Key">clarity</value>
+      <value name="clojure" display-name-key="clojure_Display_Key">clojure</value>
+      <value name="cmake" display-name-key="cmake_Display_Key">cmake</value>
+      <value name="cobol" display-name-key="cobol_Display_Key">cobol</value>
+      <value name="codeql" display-name-key="codeql_Display_Key">codeql</value>
+      <value name="coffee" display-name-key="coffee_Display_Key">coffee</value>
+      <value name="cpp" display-name-key="cpp_Display_Key">cpp</value>
+      <value name="crystal" display-name-key="crystal_Display_Key">crystal</value>
+      <value name="csharp" display-name-key="csharp_Display_Key">csharp</value>
+      <value name="css" display-name-key="css_Display_Key">css</value>
+      <value name="cue" display-name-key="cue_Display_Key">cue</value>
+      <value name="cypher" display-name-key="cypher_Display_Key">cypher</value>
+      <value name="d" display-name-key="d_Display_Key">d</value>
+      <value name="dart" display-name-key="dart_Display_Key">dart</value>
+      <value name="dax" display-name-key="dax_Display_Key">dax</value>
+      <value name="diff" display-name-key="diff_Display_Key">diff</value>
+      <value name="docker" display-name-key="docker_Display_Key">docker</value>
+      <value name="dream-maker" display-name-key="dream-maker_Display_Key">dream-maker</value>
+      <value name="elixir" display-name-key="elixir_Display_Key">elixir</value>
+      <value name="elm" display-name-key="elm_Display_Key">elm</value>
+      <value name="erb" display-name-key="erb_Display_Key">erb</value>
+      <value name="erlang" display-name-key="erlang_Display_Key">erlang</value>
+      <value name="fish" display-name-key="fish_Display_Key">fish</value>
+      <value name="fsharp" display-name-key="fsharp_Display_Key">fsharp</value>
+      <value name="gdresource" display-name-key="gdresource_Display_Key">gdresource</value>
+      <value name="gdscript" display-name-key="gdscript_Display_Key">gdscript</value>
+      <value name="gdshader" display-name-key="gdshader_Display_Key">gdshader</value>
+      <value name="gherkin" display-name-key="gherkin_Display_Key">gherkin</value>
+      <value name="gjs" display-name-key="gjs_Display_Key">gjs</value>
+      <value name="glsl" display-name-key="glsl_Display_Key">glsl</value>
+      <value name="gnuplot" display-name-key="gnuplot_Display_Key">gnuplot</value>
+      <value name="go" display-name-key="go_Display_Key">go</value>
+      <value name="graphql" display-name-key="graphql_Display_Key">graphql</value>
+      <value name="groovy" display-name-key="groovy_Display_Key">groovy</value>
+      <value name="gts" display-name-key="gts_Display_Key">gts</value>
+      <value name="hack" display-name-key="hack_Display_Key">hack</value>
+      <value name="haml" display-name-key="haml_Display_Key">haml</value>
+      <value name="handlebars" display-name-key="handlebars_Display_Key">handlebars</value>
+      <value name="haskell" display-name-key="haskell_Display_Key">haskell</value>
+      <value name="hcl" display-name-key="hcl_Display_Key">hcl</value>
+      <value name="hjson" display-name-key="hjson_Display_Key">hjson</value>
+      <value name="hlsl" display-name-key="hlsl_Display_Key">hlsl</value>
+      <value name="html" display-name-key="html_Display_Key">html</value>
+      <value name="http" display-name-key="http_Display_Key">http</value>
+      <value name="imba" display-name-key="imba_Display_Key">imba</value>
+      <value name="ini" display-name-key="ini_Display_Key">ini</value>
+      <value name="java" display-name-key="java_Display_Key">java</value>
+      <value name="javascript" display-name-key="javascript_Display_Key">javascript</value>
+      <value name="jinja-html" display-name-key="jinja-html_Display_Key">jinja-html</value>
+      <value name="jison" display-name-key="jison_Display_Key">jison</value>
+      <value name="json" display-name-key="json_Display_Key">json</value>
+      <value name="json5" display-name-key="json5_Display_Key">json5</value>
+      <value name="jsonc" display-name-key="jsonc_Display_Key">jsonc</value>
+      <value name="jsonl" display-name-key="jsonl_Display_Key">jsonl</value>
+      <value name="jsonnet" display-name-key="jsonnet_Display_Key">jsonnet</value>
+      <value name="jssm" display-name-key="jssm_Display_Key">jssm</value>
+      <value name="jsx" display-name-key="jsx_Display_Key">jsx</value>
+      <value name="julia" display-name-key="julia_Display_Key">julia</value>
+      <value name="kotlin" display-name-key="kotlin_Display_Key">kotlin</value>
+      <value name="kusto" display-name-key="kusto_Display_Key">kusto</value>
+      <value name="latex" display-name-key="latex_Display_Key">latex</value>
+      <value name="less" display-name-key="less_Display_Key">less</value>
+      <value name="liquid" display-name-key="liquid_Display_Key">liquid</value>
+      <value name="lisp" display-name-key="lisp_Display_Key">lisp</value>
+      <value name="logo" display-name-key="logo_Display_Key">logo</value>
+      <value name="lua" display-name-key="lua_Display_Key">lua</value>
+      <value name="make" display-name-key="make_Display_Key">make</value>
+      <value name="markdown" display-name-key="markdown_Display_Key">markdown</value>
+      <value name="marko" display-name-key="marko_Display_Key">marko</value>
+      <value name="matlab" display-name-key="matlab_Display_Key">matlab</value>
+      <value name="mdx" display-name-key="mdx_Display_Key">mdx</value>
+      <value name="mermaid" display-name-key="mermaid_Display_Key">mermaid</value>
+      <value name="mojo" display-name-key="mojo_Display_Key">mojo</value>
+      <value name="narrat" display-name-key="narrat_Display_Key">narrat</value>
+      <value name="nextflow" display-name-key="nextflow_Display_Key">nextflow</value>
+      <value name="nginx" display-name-key="nginx_Display_Key">nginx</value>
+      <value name="nim" display-name-key="nim_Display_Key">nim</value>
+      <value name="nix" display-name-key="nix_Display_Key">nix</value>
+      <value name="objective-c" display-name-key="objective-c_Display_Key">objective-c</value>
+      <value name="objective-cpp" display-name-key="objective-cpp_Display_Key">objective-cpp</value>
+      <value name="ocaml" display-name-key="ocaml_Display_Key">ocaml</value>
+      <value name="pascal" display-name-key="pascal_Display_Key">pascal</value>
+      <value name="perl" display-name-key="perl_Display_Key">perl</value>
+      <value name="php" display-name-key="php_Display_Key">php</value>
+      <value name="plaintext" display-name-key="plaintext_Display_Key">plaintext</value>
+      <value name="plsql" display-name-key="plsql_Display_Key">plsql</value>
+      <value name="postcss" display-name-key="postcss_Display_Key">postcss</value>
+      <value name="powerquery" display-name-key="powerquery_Display_Key">powerquery</value>
+      <value name="powershell" display-name-key="powershell_Display_Key">powershell</value>
+      <value name="prisma" display-name-key="prisma_Display_Key">prisma</value>
+      <value name="prolog" display-name-key="prolog_Display_Key">prolog</value>
+      <value name="proto" display-name-key="proto_Display_Key">proto</value>
+      <value name="pug" display-name-key="pug_Display_Key">pug</value>
+      <value name="puppet" display-name-key="puppet_Display_Key">puppet</value>
+      <value name="purescript" display-name-key="purescript_Display_Key">purescript</value>
+      <value name="python" display-name-key="python_Display_Key">python</value>
+      <value name="r" display-name-key="r_Display_Key">r</value>
+      <value name="raku" display-name-key="raku_Display_Key">raku</value>
+      <value name="razor" display-name-key="razor_Display_Key">razor</value>
+      <value name="reg" display-name-key="reg_Display_Key">reg</value>
+      <value name="rel" display-name-key="rel_Display_Key">rel</value>
+      <value name="riscv" display-name-key="riscv_Display_Key">riscv</value>
+      <value name="rst" display-name-key="rst_Display_Key">rst</value>
+      <value name="ruby" display-name-key="ruby_Display_Key">ruby</value>
+      <value name="rust" display-name-key="rust_Display_Key">rust</value>
+      <value name="sas" display-name-key="sas_Display_Key">sas</value>
+      <value name="sass" display-name-key="sass_Display_Key">sass</value>
+      <value name="scala" display-name-key="scala_Display_Key">scala</value>
+      <value name="scheme" display-name-key="scheme_Display_Key">scheme</value>
+      <value name="scss" display-name-key="scss_Display_Key">scss</value>
+      <value name="shaderlab" display-name-key="shaderlab_Display_Key">shaderlab</value>
+      <value name="shellscript" display-name-key="shellscript_Display_Key">shellscript</value>
+      <value name="shellsession" display-name-key="shellsession_Display_Key">shellsession</value>
+      <value name="smalltalk" display-name-key="smalltalk_Display_Key">smalltalk</value>
+      <value name="solidity" display-name-key="solidity_Display_Key">solidity</value>
+      <value name="sparql" display-name-key="sparql_Display_Key">sparql</value>
+      <value name="splunk" display-name-key="splunk_Display_Key">splunk</value>
+      <value name="sql" display-name-key="sql_Display_Key">sql</value>
+      <value name="ssh-config" display-name-key="ssh-config_Display_Key">ssh-config</value>
+      <value name="stata" display-name-key="stata_Display_Key">stata</value>
+      <value name="stylus" display-name-key="stylus_Display_Key">stylus</value>
+      <value name="svelte" display-name-key="svelte_Display_Key">svelte</value>
+      <value name="swift" display-name-key="swift_Display_Key">swift</value>
+      <value name="system-verilog" display-name-key="system-verilog_Display_Key">system-verilog</value>
+      <value name="tasl" display-name-key="tasl_Display_Key">tasl</value>
+      <value name="tcl" display-name-key="tcl_Display_Key">tcl</value>
+      <value name="tex" display-name-key="tex_Display_Key">tex</value>
+      <value name="toml" display-name-key="toml_Display_Key">toml</value>
+      <value name="tsx" display-name-key="tsx_Display_Key">tsx</value>
+      <value name="turtle" display-name-key="turtle_Display_Key">turtle</value>
+      <value name="twig" display-name-key="twig_Display_Key">twig</value>
+      <value name="typescript" display-name-key="typescript_Display_Key">typescript</value>
+      <value name="v" display-name-key="v_Display_Key">v</value>
+      <value name="vb" display-name-key="vb_Display_Key">vb</value>
+      <value name="verilog" display-name-key="verilog_Display_Key">verilog</value>
+      <value name="vhdl" display-name-key="vhdl_Display_Key">vhdl</value>
+      <value name="viml" display-name-key="viml_Display_Key">viml</value>
+      <value name="vue" display-name-key="vue_Display_Key">vue</value>
+      <value name="vue-html" display-name-key="vue-html_Display_Key">vue-html</value>
+      <value name="vyper" display-name-key="vyper_Display_Key">vyper</value>
+      <value name="wasm" display-name-key="wasm_Display_Key">wasm</value>
+      <value name="wenyan" display-name-key="wenyan_Display_Key">wenyan</value>
+      <value name="wgsl" display-name-key="wgsl_Display_Key">wgsl</value>
+      <value name="wolfram" display-name-key="wolfram_Display_Key">wolfram</value>
+      <value name="xml" display-name-key="xml_Display_Key">xml</value>
+      <value name="xsl" display-name-key="xsl_Display_Key">xsl</value>
+      <value name="yaml" display-name-key="yaml_Display_Key">yaml</value>
+      <value name="zenscript" display-name-key="zenscript_Display_Key">zenscript</value>
+      <value name="zig" display-name-key="zig_Display_Key">zig</value>
+      <value name="zsh" display-name-key="zsh_Display_Key">zsh</value>
+    </property>
+    <property name="syntaxHighlighterDefaultTheme" display-name-key="syntaxHighlighterDefaultTheme_Display_Key"
+      description-key="syntaxHighlighterDefaultTheme_Desc_Key" of-type="Enum" usage="input"
+      required="false" default-value="dark-plus">
+      <value name="andromeda" display-name-key="andromeda_Display_Key">andromeda</value>
+      <value name="ayu-dark" display-name-key="ayuDark_Display_Key">ayu-dark</value>
+      <value name="ayu-mirage" display-name-key="ayuMirage_Display_Key">ayu-mirage</value>
+      <value name="ayu-light" display-name-key="ayuLight_Display_Key">ayu-light</value>
+      <value name="cobalt2" display-name-key="cobalt2_Display_Key">cobalt2</value>
+      <value name="dark-plus" display-name-key="darkPlus_Display_Key">dark-plus</value>
+      <value name="dracula-soft" display-name-key="draculaSoft_Display_Key">dracula-soft</value>
+      <value name="dracula" display-name-key="dracula_Display_Key">dracula</value>
+      <value name="github-dark-dimmed" display-name-key="githubDarkDimmed_Display_Key">github-dark-dimmed</value>
+      <value name="github-dark" display-name-key="githubDark_Display_Key">github-dark</value>
+      <value name="github-light" display-name-key="githubLight_Display_Key">github-light</value>
+      <value name="light-plus" display-name-key="lightPlus_Display_Key">light-plus</value>
+      <value name="material-theme-darker" display-name-key="materialDarker_Display_Key">material-theme-darker</value>
+      <value name="material-theme" display-name-key="materialDefault_Display_Key">material-theme</value>
+      <value name="material-theme-lighter" display-name-key="materialLighter_Display_Key">material-theme-lighter</value>
+      <value name="material-theme-ocean" display-name-key="materialOcean_Display_Key">material-theme-ocean</value>
+      <value name="material-theme-palenight" display-name-key="materialPalenight_Display_Key">material-theme-palenight</value>
+      <value name="min-dark" display-name-key="minDark_Display_Key">min-dark</value>
+      <value name="min-light" display-name-key="minLight_Display_Key">min-light</value>
+      <value name="monokai" display-name-key="monokai_Display_Key">monokai</value>
+      <value name="night-owl" display-name-key="nightOwl_Display_Key">night-owl</value>
+      <value name="nord" display-name-key="nord_Display_Key">nord</value>
+      <value name="one-dark-pro" display-name-key="oneDarkPro_Display_Key">one-dark-pro</value>
+      <value name="poimandres" display-name-key="poimandres_Display_Key">poimandres</value>
+      <value name="rose-pine" display-name-key="rosePine_Display_Key">rose-pine</value>
+      <value name="rose-pine-dawn" display-name-key="rosePineDawn_Display_Key">rose-pine-dawn</value>
+      <value name="rose-pine-moon" display-name-key="rosePineMoon_Display_Key">rose-pine-moon</value>
+      <value name="slack-dark" display-name-key="slackDark_Display_Key">slack-dark</value>
+      <value name="slack-ochin" display-name-key="slackOchin_Display_Key">slack-ochin</value>
+      <value name="solarized-dark" display-name-key="solarizedDark_Display_Key">solarized-dark</value>
+      <value name="solarized-light" display-name-key="solarizedLight_Display_Key">solarized-light</value>
+      <value name="vitesse-dark" display-name-key="vitesseDark_Display_Key">vitesse-dark</value>
+      <value name="vitesse-light" display-name-key="vitesseLight_Display_Key">vitesse-light</value>
+    </property>
+    <!--
+      Property node's of-type attribute can be of-type-group attribute.
+      Example:
+      <type-group name="numbers">
+        <type>Whole.None</type>
+        <type>Currency</type>
+        <type>FP</type>
+        <type>Decimal</type>
+      </type-group>
+      <property name="sampleProperty" display-name-key="Property_Display_Key"
+    description-key="Property_Desc_Key" of-type-group="numbers" usage="bound" required="true" />
+    -->
+    <resources>
+      <code path="index.ts" order="1" />
+      <platform-library name="React" version="16.14.0" />
+      <platform-library name="Fluent" version="9.68.0" />
+      <!-- UNCOMMENT TO ADD MORE RESOURCES
+      <css path="css/SyntaxHighlighter.css" order="1" />
+      <resx path="strings/SyntaxHighlighter.1033.resx" version="1.0.0" />
+      -->
+    </resources>
+
+    <feature-usage>
+
+      <uses-feature name="Utility" required="true" />
+      <uses-feature name="WebAPI" required="true" />
+    </feature-usage>
+
+  </control>
+</manifest>

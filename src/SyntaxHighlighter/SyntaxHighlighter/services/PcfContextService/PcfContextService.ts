@@ -1,0 +1,147 @@
+import { Theme } from "@fluentui/react-components";
+import { IInputs } from "../../generated/ManifestTypes";
+
+export interface IPcfContextServiceProps {
+  context: ComponentFramework.Context<IInputs>;
+  instanceid: string;
+  configurationParameters?: string | null;
+}
+
+const SmallFormFactorMaxWidth = 350;
+
+const enum FormFactors {
+  Unknown = 0,
+  Desktop = 1,
+  Tablet = 2,
+  Phone = 3,
+}
+
+interface ContextInfo {
+  entityTypeName: string;
+  entityId: string;
+}
+
+export class PcfContextService {
+  instanceid: string;
+  context: ComponentFramework.Context<IInputs>;
+  theme: Theme;
+  formFactor: string;
+
+  constructor(props: IPcfContextServiceProps) {
+    this.instanceid = props.instanceid;
+    this.context = props.context;
+    this.theme = this.getTheme();      
+    this.formFactor =
+      props.context.client.getFormFactor() == (FormFactors.Phone as number) ||
+      props.context.mode.allocatedWidth < SmallFormFactorMaxWidth
+        ? "small"
+        : "large";
+  }
+
+  public inDesignMode(): boolean {
+    // Previously only handled commercial cloud.
+    // Updated to also handle GCC, GCC High, and DoD maker portal URLs.
+    const designModeUrls = [
+      "make.powerapps.com",
+      "make.gov.powerapps.us", // GCC
+      "make.high.powerapps.us", // GCC High
+      "make.apps.appsplatform.us", // DoD
+      "localhost", // Localhost for testing
+    ];
+    const currentUrl = window.location.href;
+    return designModeUrls.some((url) => currentUrl.includes(url));
+  }
+
+  public isCanvasApp(): boolean {
+    return this.context.mode.allocatedHeight !== -1;
+  }
+
+  public isControlDisabled(): boolean {
+    // Return the control's disabled state from the context
+    return this.context.mode.isControlDisabled;
+  }
+
+  public isVisible(): boolean {
+    return this.context.mode.isVisible;
+  }
+
+  /**
+   * Check if the dependent choice field has field-level security enabled
+   * @returns true if field has security applied
+   */
+  public isFieldSecured(): boolean {
+    const security = this.context.parameters?.syntaxHiglightedField?.security;
+    return security?.secured ?? false;
+  }
+
+  /**
+   * Check if the current user can read the dependent choice field value
+   * @returns true if user has read permission
+   */
+  public canReadField(): boolean {
+    const security = this.context.parameters?.syntaxHiglightedField?.security;
+    return security?.readable ?? true;
+  }
+
+  /**
+   * Check if the current user can edit the dependent choice field
+   * @returns true if user has edit permission
+   */
+  public canEditField(): boolean {
+    const security = this.context.parameters?.syntaxHiglightedField?.security;
+    return security?.editable ?? true;
+  }
+
+  /**
+   * Check if the control is editable (not disabled and user has edit permission)
+   * @returns true if control can be edited by current user
+   */
+  public isControlEditable(): boolean {
+    return !this.isControlDisabled() && this.canEditField();
+  }
+
+  public getTheme(): Theme {
+    const defaultTheme: Theme = this.context.fluentDesignLanguage?.tokenTheme as Theme;
+    return this.isControlDisabled() && !this.isCanvasApp()
+        ? {
+            ...defaultTheme,
+            colorCompoundBrandStroke: defaultTheme?.colorNeutralStroke1,
+            colorCompoundBrandStrokeHover:
+            defaultTheme?.colorNeutralStroke1Hover,
+            colorCompoundBrandStrokePressed:
+            defaultTheme?.colorNeutralStroke1Pressed,
+            //colorCompoundBrandStrokeSelected: props.theme?.colorNeutralStroke1Selected,
+          }
+        : defaultTheme;
+  }
+
+  public getEntityTypeName(): string {
+    // @ts-expect-error Assert contextInfo to a known type.
+    const contextInfo = this.context.mode.contextInfo as ContextInfo;
+    return contextInfo.entityTypeName;
+  }
+
+  public getEntityId(): string {
+    // @ts-expect-error Assert contextInfo to a known type.
+    const contextInfo = this.context.mode.contextInfo as ContextInfo;
+    return contextInfo.entityId;
+  }
+
+  /**
+   * Get the selected default language from control properties
+   * @returns The selected language ID or 'markdown' as default
+   */
+  public getDefaultLanguage(): string {
+    return this.context.parameters.syntaxHighlighterDefaultLanguage?.raw ?? 'markdown';
+  }
+
+  /**
+   * Get the selected default theme from control properties
+   * @returns The selected theme name or 'dark-plus' as default
+   */
+  public getDefaultTheme(): string {
+    return this.context.parameters.syntaxHighlighterDefaultTheme?.raw ?? 'dark-plus';
+  }
+
+  
+}
