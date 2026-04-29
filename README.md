@@ -5,6 +5,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![PCF](https://img.shields.io/badge/PCF-Virtual%20Control-742774)
 ![Shiki](https://img.shields.io/badge/powered%20by-Shiki-orange)
+![MobX](https://img.shields.io/badge/powered%20by-MobX-FF7A00)
 
 ---
 
