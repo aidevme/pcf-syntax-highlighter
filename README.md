@@ -3,7 +3,7 @@
 > A PowerApps PCF control for VS Code–quality syntax highlighting powered by [Shiki](https://shiki.matsu.io) — supporting 140+ languages and 25+ themes.
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![PCF](https://img.shields.io/badge/PCF-Standard%20Control-742774)
+![PCF](https://img.shields.io/badge/PCF-Virtual%20Control-742774)
 ![Shiki](https://img.shields.io/badge/powered%20by-Shiki-orange)
 
 ---
