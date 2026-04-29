@@ -1,6 +1,8 @@
 name: Claude Code
 
 on:
+  push:
+    branches: [main, dev]
   issue_comment:
     types: [created]
   pull_request:

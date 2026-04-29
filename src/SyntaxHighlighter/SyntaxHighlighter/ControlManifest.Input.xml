@@ -1,36 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <manifest>
-  <control namespace="AIDEVME.CRM.Pcf" constructor="SyntaxHighlighter" version="0.0.1"
-    display-name-key="SyntaxHighlighter" description-key="SyntaxHighlighter description"
-    control-type="virtual">
-    <!--external-service-usage
-    node declares whether this 3rd party PCF control is using external service or not, if yes, this
-    control will be considered as premium and please also add the external domain it is using.
-    If it is not using any external service, please set the enabled="false" and DO NOT add any domain
-    below. The "enabled" will be false by default.
-    Example1:
-      <external-service-usage enabled="true">
-        <domain>www.Microsoft.com</domain>
-      </external-service-usage>
-    Example2:
-      <external-service-usage enabled="false">
-      </external-service-usage>
-    -->
-    <external-service-usage enabled="false">
-      <!--UNCOMMENT
-      TO ADD EXTERNAL DOMAINS
-      <domain></domain>
-      <domain></domain>
-      -->
-    </external-service-usage>
-    <!-- property node identifies a specific, configurable piece of data that the control expects
-    from CDS -->
-    <property name="syntaxHiglightedField" display-name-key="syntaxHiglightedField_Display_Key"
-      description-key="syntaxHiglightedField_Desc_Key" of-type="Multiple" usage="bound"
-      required="true" />
-    <property name="syntaxHighlighterDefaultLanguage" display-name-key="syntaxHighlighterDefaultLanguage_Display_Key"
-      description-key="syntaxHighlighterDefaultLanguage_Desc_Key" of-type="Enum" usage="input"
-      required="false" default-value="markdown">
+  <control namespace="AIDEVME.CRM.Pcf" constructor="SyntaxHighlighter" version="0.0.1" display-name-key="SyntaxHighlighter" description-key="SyntaxHighlighter description" control-type="virtual">
+    <external-service-usage enabled="false"/>
+    <property name="syntaxHiglightedField" display-name-key="syntaxHiglightedField_Display_Key" description-key="syntaxHiglightedField_Desc_Key" of-type="Multiple" usage="bound" required="true"/>
+    <property name="syntaxHighlighterDefaultLanguage" display-name-key="syntaxHighlighterDefaultLanguage_Display_Key" description-key="syntaxHighlighterDefaultLanguage_Desc_Key" of-type="Enum" usage="input" required="false" default-value="markdown">
       <value name="abap" display-name-key="abap_Display_Key">abap</value>
       <value name="actionscript-3" display-name-key="actionscript-3_Display_Key">actionscript-3</value>
       <value name="ada" display-name-key="ada_Display_Key">ada</value>
@@ -204,9 +177,7 @@
       <value name="zig" display-name-key="zig_Display_Key">zig</value>
       <value name="zsh" display-name-key="zsh_Display_Key">zsh</value>
     </property>
-    <property name="syntaxHighlighterDefaultTheme" display-name-key="syntaxHighlighterDefaultTheme_Display_Key"
-      description-key="syntaxHighlighterDefaultTheme_Desc_Key" of-type="Enum" usage="input"
-      required="false" default-value="dark-plus">
+    <property name="syntaxHighlighterDefaultTheme" display-name-key="syntaxHighlighterDefaultTheme_Display_Key" description-key="syntaxHighlighterDefaultTheme_Desc_Key" of-type="Enum" usage="input" required="false" default-value="dark-plus">
       <value name="andromeda" display-name-key="andromeda_Display_Key">andromeda</value>
       <value name="ayu-dark" display-name-key="ayuDark_Display_Key">ayu-dark</value>
       <value name="ayu-mirage" display-name-key="ayuMirage_Display_Key">ayu-mirage</value>
@@ -241,33 +212,16 @@
       <value name="vitesse-dark" display-name-key="vitesseDark_Display_Key">vitesse-dark</value>
       <value name="vitesse-light" display-name-key="vitesseLight_Display_Key">vitesse-light</value>
     </property>
-    <!--
-      Property node's of-type attribute can be of-type-group attribute.
-      Example:
-      <type-group name="numbers">
-        <type>Whole.None</type>
-        <type>Currency</type>
-        <type>FP</type>
-        <type>Decimal</type>
-      </type-group>
-      <property name="sampleProperty" display-name-key="Property_Display_Key"
-    description-key="Property_Desc_Key" of-type-group="numbers" usage="bound" required="true" />
-    -->
+    <property name="additionalConfigurationParameters" display-name-key="additionalConfigurationParameters_Display_Key" description-key="additionalConfigurationParameters_Desc_Key" of-type="Multiple" usage="input" required="false"/>
     <resources>
-      <code path="index.ts" order="1" />
-      <platform-library name="React" version="16.14.0" />
-      <platform-library name="Fluent" version="9.68.0" />
-      <!-- UNCOMMENT TO ADD MORE RESOURCES
-      <css path="css/SyntaxHighlighter.css" order="1" />
-      <resx path="strings/SyntaxHighlighter.1033.resx" version="1.0.0" />
-      -->
+      <code path="index.ts" order="1"/>
+      <platform-library name="React" version="16.14.0"/>
+      <platform-library name="Fluent" version="9.68.0"/>
+      <resx path="strings/SyntaxHighlighter.1033.resx" version="1.0.0"/>
     </resources>
-
     <feature-usage>
-
-      <uses-feature name="Utility" required="true" />
-      <uses-feature name="WebAPI" required="true" />
+      <uses-feature name="Utility" required="true"/>
+      <uses-feature name="WebAPI" required="true"/>
     </feature-usage>
-
   </control>
 </manifest>

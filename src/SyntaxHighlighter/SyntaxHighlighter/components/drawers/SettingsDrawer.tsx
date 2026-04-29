@@ -24,7 +24,7 @@ import { Dismiss24Regular, Settings24Regular } from '@fluentui/react-icons';
 import { languages } from '../../utils/languages';
 import { themes } from '../../utils/themes';
 
-const useStyles = makeStyles({
+const useSettingsDrawerStyles = makeStyles({
   content: {
     padding: tokens.spacingVerticalM,
   },
@@ -99,12 +99,12 @@ export interface ISettingsDrawerProps {
 }
 
 export const SettingsDrawer: React.FC<ISettingsDrawerProps> = (props) => {
-  const styles = useStyles();
+  const styles = useSettingsDrawerStyles();
 
   // Local state for pending changes
   const [localTheme, setLocalTheme] = React.useState(props.theme);
   const [localLanguage, setLocalLanguage] = React.useState(props.language);
-  const [localShowLineNumbers, setLocalShowLineNumbers] = React.useState(props.showLineNumbers ?? true);
+  const [localShowLineNumbers, setLocalShowLineNumbers] = React.useState(props.showLineNumbers ?? false);
   const [localShowCopyButton, setLocalShowCopyButton] = React.useState(props.showCopyButton ?? true);
   const [localLineHighlights, setLocalLineHighlights] = React.useState(props.lineHighlights ?? false);
   const [localLineHighlightsOnHover, setLocalLineHighlightsOnHover] = React.useState(props.lineHighlightsOnHover ?? false);
@@ -115,7 +115,7 @@ export const SettingsDrawer: React.FC<ISettingsDrawerProps> = (props) => {
     if (props.isOpen) {
       setLocalTheme(props.theme);
       setLocalLanguage(props.language);
-      setLocalShowLineNumbers(props.showLineNumbers ?? true);
+      setLocalShowLineNumbers(props.showLineNumbers ?? false);
       setLocalShowCopyButton(props.showCopyButton ?? true);
       setLocalLineHighlights(props.lineHighlights ?? false);
       setLocalLineHighlightsOnHover(props.lineHighlightsOnHover ?? false);
@@ -125,14 +125,14 @@ export const SettingsDrawer: React.FC<ISettingsDrawerProps> = (props) => {
 
   // Sort languages alphabetically by display name
   const sortedLanguages = React.useMemo(() => {
-    return Object.entries(languages).sort(([, nameA], [, nameB]) => 
+    return Object.entries(languages).sort(([, nameA], [, nameB]) =>
       nameA.localeCompare(nameB)
     );
   }, []);
 
   // Sort themes alphabetically by display name
   const sortedThemes = React.useMemo(() => {
-    return Object.entries(themes).sort(([, nameA], [, nameB]) => 
+    return Object.entries(themes).sort(([, nameA], [, nameB]) =>
       nameA.localeCompare(nameB)
     );
   }, []);
@@ -212,52 +212,56 @@ export const SettingsDrawer: React.FC<ISettingsDrawerProps> = (props) => {
 
       <DrawerBody>
         <div className={styles.content}>
+
+          <Text size={200} block style={{ color: tokens.colorNeutralForeground3, marginBottom: tokens.spacingVerticalM }}>
+            Customize the appearance and behaviour of the syntax highlighter. Changes to language and theme take effect after clicking Apply. Other settings such as line numbers, highlights, and font styling adjust how code is displayed to the reader.
+          </Text>
           <Accordion collapsible multiple defaultOpenItems={['line-settings', 'theme', 'languages']}>
             <AccordionItem value="line-settings">
               <AccordionHeader>Line Settings</AccordionHeader>
               <AccordionPanel className={styles.accordionPanel}>
                 <div className={styles.checkboxRow}>
-              <Checkbox
-                checked={localShowLineNumbers}
-                onChange={(_, data) => setLocalShowLineNumbers(data.checked === true)}
-                label="Line numbers"
-              />
-              <Text size={200} className={styles.helperText}>
-                Enable line numbers and set a starting number.
-              </Text>
-            </div>
+                  <Checkbox
+                    checked={localShowLineNumbers}
+                    onChange={(_, data) => setLocalShowLineNumbers(data.checked === true)}
+                    label="Line numbers"
+                  />
+                  <Text size={200} className={styles.helperText}>
+                    Enable line numbers and set a starting number.
+                  </Text>
+                </div>
 
-            <div className={styles.checkboxRow}>
-              <Checkbox
-                checked={localLineHighlights}
-                onChange={(_, data) => setLocalLineHighlights(data.checked === true)}
-                label="Line highlights"
-              />
-              <Text size={200} className={styles.helperText}>
-                Highlight individual lines to bring attention to specific code.
-              </Text>
-            </div>
+                <div className={styles.checkboxRow}>
+                  <Checkbox
+                    checked={localLineHighlights}
+                    onChange={(_, data) => setLocalLineHighlights(data.checked === true)}
+                    label="Line highlights"
+                  />
+                  <Text size={200} className={styles.helperText}>
+                    Highlight individual lines to bring attention to specific code.
+                  </Text>
+                </div>
 
-            <div className={styles.checkboxRow}>
-              <Checkbox
-                checked={localLineHighlightsOnHover}
-                onChange={(_, data) => setLocalLineHighlightsOnHover(data.checked === true)}
-                label="Line highlights on hover"
-              />
-              <Text size={200} className={styles.helperText}>
-                Every line will be highlighted when hovered.
-              </Text>
-            </div>
+                <div className={styles.checkboxRow}>
+                  <Checkbox
+                    checked={localLineHighlightsOnHover}
+                    onChange={(_, data) => setLocalLineHighlightsOnHover(data.checked === true)}
+                    label="Line highlights on hover"
+                  />
+                  <Text size={200} className={styles.helperText}>
+                    Every line will be highlighted when hovered.
+                  </Text>
+                </div>
 
-            <div className={styles.checkboxRow}>
-              <Checkbox
-                checked={localLineBlurring}
-                onChange={(_, data) => setLocalLineBlurring(data.checked === true)}
-                label="Line blurring"
-              />
-              <Text size={200} className={styles.helperText}>
-                Blur surrounding code to focus on specific lines.
-              </Text>
+                <div className={styles.checkboxRow}>
+                  <Checkbox
+                    checked={localLineBlurring}
+                    onChange={(_, data) => setLocalLineBlurring(data.checked === true)}
+                    label="Line blurring"
+                  />
+                  <Text size={200} className={styles.helperText}>
+                    Blur surrounding code to focus on specific lines.
+                  </Text>
                 </div>
               </AccordionPanel>
             </AccordionItem>
@@ -266,18 +270,18 @@ export const SettingsDrawer: React.FC<ISettingsDrawerProps> = (props) => {
               <AccordionHeader>Theme</AccordionHeader>
               <AccordionPanel className={styles.accordionPanel}>
                 <Field label="Themes">
-              <Dropdown
-                placeholder="Select theme"
-                value={localTheme}
-                selectedOptions={localTheme ? [localTheme] : []}
-                onOptionSelect={handleThemeChange}
-              >
-                {sortedThemes.map(([themeId, themeName]) => (
-                  <Option key={themeId} value={themeId}>
-                    {themeName}
-                  </Option>
-                ))}
-              </Dropdown>
+                  <Dropdown
+                    placeholder="Select theme"
+                    value={localTheme ? (themes[localTheme] ?? localTheme) : undefined}
+                    selectedOptions={localTheme ? [localTheme] : []}
+                    onOptionSelect={handleThemeChange}
+                  >
+                    {sortedThemes.map(([themeId, themeName]) => (
+                      <Option key={themeId} value={themeId}>
+                        {themeName}
+                      </Option>
+                    ))}
+                  </Dropdown>
                 </Field>
               </AccordionPanel>
             </AccordionItem>
@@ -286,18 +290,18 @@ export const SettingsDrawer: React.FC<ISettingsDrawerProps> = (props) => {
               <AccordionHeader>Languages</AccordionHeader>
               <AccordionPanel className={styles.accordionPanel}>
                 <Field label="Language">
-              <Dropdown
-                placeholder="Select language"
-                value={localLanguage}
-                selectedOptions={localLanguage ? [localLanguage] : []}
-                onOptionSelect={handleLanguageChange}
-              >
-                {sortedLanguages.map(([langId, langName]) => (
-                  <Option key={langId} value={langId}>
-                    {langName}
-                  </Option>
-                ))}
-              </Dropdown>
+                  <Dropdown
+                    placeholder="Select language"
+                    value={localLanguage ? (languages[localLanguage] ?? localLanguage) : undefined}
+                    selectedOptions={localLanguage ? [localLanguage] : []}
+                    onOptionSelect={handleLanguageChange}
+                  >
+                    {sortedLanguages.map(([langId, langName]) => (
+                      <Option key={langId} value={langId}>
+                        {langName}
+                      </Option>
+                    ))}
+                  </Dropdown>
                 </Field>
               </AccordionPanel>
             </AccordionItem>
@@ -306,11 +310,11 @@ export const SettingsDrawer: React.FC<ISettingsDrawerProps> = (props) => {
               <AccordionHeader>Header Type</AccordionHeader>
               <AccordionPanel className={styles.accordionPanel}>
                 <Field label="Header">
-              <Dropdown placeholder="Select header type">
-                <Option value="none">None</Option>
-                <Option value="basic">Basic</Option>
-                <Option value="extended">Extended</Option>
-              </Dropdown>
+                  <Dropdown placeholder="Select header type">
+                    <Option value="none">None</Option>
+                    <Option value="basic">Basic</Option>
+                    <Option value="extended">Extended</Option>
+                  </Dropdown>
                 </Field>
               </AccordionPanel>
             </AccordionItem>
@@ -319,11 +323,11 @@ export const SettingsDrawer: React.FC<ISettingsDrawerProps> = (props) => {
               <AccordionHeader>Footer Type</AccordionHeader>
               <AccordionPanel className={styles.accordionPanel}>
                 <Field label="Footer">
-              <Dropdown placeholder="Select footer type">
-                <Option value="none">None</Option>
-                <Option value="basic">Basic</Option>
-                <Option value="extended">Extended</Option>
-              </Dropdown>
+                  <Dropdown placeholder="Select footer type">
+                    <Option value="none">None</Option>
+                    <Option value="basic">Basic</Option>
+                    <Option value="extended">Extended</Option>
+                  </Dropdown>
                 </Field>
               </AccordionPanel>
             </AccordionItem>
@@ -350,7 +354,7 @@ export const SettingsDrawer: React.FC<ISettingsDrawerProps> = (props) => {
                     cursor: 'pointer',
                   }}>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                      <rect x="4" y="4" width="12" height="12" stroke="currentColor" fill="none" strokeWidth="2"/>
+                      <rect x="4" y="4" width="12" height="12" stroke="currentColor" fill="none" strokeWidth="2" />
                     </svg>
                   </div>
                   <div style={{
@@ -365,7 +369,7 @@ export const SettingsDrawer: React.FC<ISettingsDrawerProps> = (props) => {
                     backgroundColor: '#E6F2FF',
                   }}>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                      <rect x="4" y="4" width="12" height="12" rx="2" stroke="currentColor" fill="none" strokeWidth="2"/>
+                      <rect x="4" y="4" width="12" height="12" rx="2" stroke="currentColor" fill="none" strokeWidth="2" />
                     </svg>
                   </div>
                   <div style={{
@@ -379,7 +383,7 @@ export const SettingsDrawer: React.FC<ISettingsDrawerProps> = (props) => {
                     cursor: 'pointer',
                   }}>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                      <text x="10" y="14" style={{textAnchor: 'middle', fontSize: '14px', fontWeight: 'bold'}}>A</text>
+                      <text x="10" y="14" style={{ textAnchor: 'middle', fontSize: '14px', fontWeight: 'bold' }}>A</text>
                     </svg>
                   </div>
                 </div>
@@ -402,7 +406,7 @@ export const SettingsDrawer: React.FC<ISettingsDrawerProps> = (props) => {
               <AccordionHeader>Font Styling</AccordionHeader>
               <AccordionPanel className={styles.accordionPanel}>
                 <div className={styles.settingRow}>
-                  
+
                   <Label size="small" className={styles.fontFieldLabel}>
                     FONT SIZE
                   </Label>
@@ -462,7 +466,7 @@ export const SettingsDrawer: React.FC<ISettingsDrawerProps> = (props) => {
                   <Label size="small" weight="semibold" className={styles.fontFieldLabel}>
                     Line Height
                   </Label>
-                 
+
                   <div className={styles.sizeButtonGroup}>
                     <div style={{
                       flex: 1,
@@ -544,7 +548,7 @@ export const SettingsDrawer: React.FC<ISettingsDrawerProps> = (props) => {
                     MAX EDITOR HEIGHT (ADMIN ONLY)
                   </Label>
                   <Input type="number" placeholder="0" defaultValue="0" />
-                  <Text size={200} className={styles.helperText} style={{marginLeft: 0}}>
+                  <Text size={200} className={styles.helperText} style={{ marginLeft: 0 }}>
                     Set to 0 to disable.
                   </Text>
                 </div>
@@ -577,7 +581,7 @@ export const SettingsDrawer: React.FC<ISettingsDrawerProps> = (props) => {
               </AccordionPanel>
             </AccordionItem>
 
-            
+
           </Accordion>
         </div>
       </DrawerBody>
