@@ -1,0 +1,58 @@
+name: Feature Request
+description: Suggest a new feature or enhancement for the PCF Syntax Highlighter control
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement! Please describe your idea in detail.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / Motivation
+      description: Is your feature request related to a problem? Describe what you're trying to achieve.
+      placeholder: I'm frustrated when...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe the feature or change you'd like to see.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Have you considered any alternative approaches or workarounds?
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Which part of the control does this relate to?
+      options:
+        - Syntax Highlighting / Shiki
+        - Settings Drawer
+        - Editor / Viewer Tabs
+        - Copy Button / Clipboard
+        - Line Numbers / Highlights
+        - Themes
+        - Languages
+        - Font Styling
+        - PCF Manifest / Properties
+        - Build / Deployment
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Mockups, screenshots, or references to similar implementations.
